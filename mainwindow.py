@@ -17,7 +17,6 @@ class MainWindow(QMainWindow):
         self.ui.graphicsView.setScene(self.scene)
 
     def wheelEvent(self, event):
-        print(event.delta())
         if event.delta() > 0:
             self.ui.graphicsView.scale(1.2, 1.2)
         else:
@@ -25,31 +24,25 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def dibujar(self):
-        print('dibujar')
-
         pen = QPen()
         pen.setWidth(2)
 
-        for i in range(0, 100):
+        for i in range(200):
             r = randint(0, 255)
             g = randint(0, 255)
             b = randint(0, 255)
-
             color = QColor(r, g, b)
             pen.setColor(color)
 
-            x_origen = randint(0, 500)
-            y_origen = randint(0, 500)
-            x_destin = randint(0, 500)
-            y_destin = randint(0, 500)
+            origen_x = randint(0, 500)
+            origen_y = randint(0, 500)
+            destino_x = randint(0, 500)
+            destino_y = randint(0, 500)
 
-            self.scene.addEllipse(x_origen, y_origen, 6, 6, pen)
-            self.scene.addEllipse(x_destin, y_destin, 6, 6, pen)
-            self.scene.addLine(x_origen+3, y_origen+3, x_destin+3, y_destin+3, pen)
-
+            self.scene.addEllipse(origen_x, origen_y, 3, 3, pen)
+            self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)
+            self.scene.addLine(origen_x+3, origen_y+3, destino_x, destino_y, pen)
 
     @Slot()
     def limpiar(self):
-        print('limpiar')
         self.scene.clear()
-        self.ui.graphicsView.setTransform(QTransform())
